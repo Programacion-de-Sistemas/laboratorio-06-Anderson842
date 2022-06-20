@@ -1,0 +1,46 @@
+#include<stdio.h>
+#include<stdlib.h>
+
+//definimos nuestra node
+typedef struct node
+{
+    int number;
+    struct node *next;
+}
+node;
+node *insertarNodo(int valor, node *lista);
+int main(){
+    node *list=NULL;
+    insertarNodo(5, list);
+    insertarNodo(15, list);
+
+    
+    for (node *tmp = list;tmp!=NULL;tmp=tmp->next)
+    {
+        printf("%i\n",tmp->number);
+
+
+    }
+
+    // función (free) BUENA PR´ACTICA EN PROGRAMACI´ON EN "C"
+    while(list!=NULL){
+        node *tmp=list->next;
+        free(list);
+        list=tmp;
+    }
+
+    return 0;
+
+}
+node *insertarNodo(int valor, node *lista){ 
+   node *nodoNuevo;
+   nodoNuevo = (node *)malloc(sizeof(node));
+   if(nodoNuevo!=NULL)
+   { 
+      nodoNuevo->number=valor;
+      nodoNuevo->next=lista;
+
+      lista=nodoNuevo;
+   }
+   return lista;
+}
